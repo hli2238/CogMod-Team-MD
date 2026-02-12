@@ -17,8 +17,7 @@ def approximate_pi(num_points):
     return pi_estimate
 
 
-if __name__ == "__main__":
-    # Testing various different points
-    for points in [100, 1000, 10000, 100000, 1000000]:
-        pi_value = approximate_pi(points)
-        print(f"Using {points} points: π ≈ {pi_value}")
+# Test different sample sizes
+for points in [100, 1000, 10000, 100000, 1000000]:
+    pi_value = approximate_pi(points)
+    print(f"Using {points} points: π ≈ {pi_value}")
