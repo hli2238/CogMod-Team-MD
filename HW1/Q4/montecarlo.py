@@ -1,28 +1,24 @@
 import numpy as np
 
-def approximate_pi(num_points):
+def q4(numPoints):
     # Generate random x and y values between -1 and 1
-    x = np.random.uniform(-1, 1, num_points)
-    y = np.random.uniform(-1, 1, num_points)
-    
-    # Debugging
-    for point in range(len(x)):
-        print(f"(point:{x[point]},{y[point]})")
-    
+    x = np.random.uniform(-1, 1, numPoints)
+    y = np.random.uniform(-1, 1, numPoints)
+
     # Check which points fall inside the unit circle
-    inside_circle = (x**2 + y**2) <= 1
+    insideCircle = (x**2 + y**2) <= 1
 
     # Count how many are inside
-    count_inside = np.sum(inside_circle)
+    countInside = np.sum(insideCircle)
 
     # Apply Monte Carlo formula
-    pi_estimate = 4 * (count_inside / num_points)
+    piEstimate = 4 * (countInside / numPoints)
 
-    return pi_estimate
+    return piEstimate
 
 
 if __name__ == "__main__":
     
     for points in [100, 1000, 10000, 100000, 1000000]:
-        pi_value = approximate_pi(points)
-        print(f"Using {points} points: π ≈ {pi_value}")
+        piValue = q4(points)
+        print(f"Using {points} points: π ≈ {piValue}")
