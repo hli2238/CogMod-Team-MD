@@ -4,11 +4,7 @@ def approximate_pi(num_points):
     # Generate random x and y values between -1 and 1
     x = np.random.uniform(-1, 1, num_points)
     y = np.random.uniform(-1, 1, num_points)
-    
-    # Debugging
-    for point in range(len(x)):
-        print(f"(point:{x[point]},{y[point]})")
-    
+
     # Check which points fall inside the unit circle
     inside_circle = (x**2 + y**2) <= 1
 
