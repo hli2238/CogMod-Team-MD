@@ -5,7 +5,6 @@ __pycache__/
 *.py[codz]
 *$py.class
 
-README.md
 # C extensions
 *.so
 
@@ -216,4 +215,5 @@ marimo/_lsp/
 __marimo__/
 
 # Streamlit
+
 .streamlit/secrets.toml
