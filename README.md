@@ -8,4 +8,6 @@
 - A practical usage of cognitive modeling is to build human-like AI models. By studying how humans behave, researchers can also design algorithms to mimick those behaviors and cognitive processes. These algorithms can assist AI-systems to interact in more realistic ways which is essential in products such as virtual assistants. 
 
 ## Team Members
+- Michael L
+- Dillon L
 
