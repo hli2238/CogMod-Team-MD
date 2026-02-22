@@ -1,0 +1,9 @@
+Graph 1: Posterior vs Prior
+	As prior increases, posterior first increases rapidly, and then levels out at the end of the graph. This matches the growth of ln(X)
+
+	
+Graph 2: Posterior vs Sensitivity
+	As sensitivity increases, posterior increases linearly. 
+
+Graph 3: Posterior vs Specificity
+	As specificity increases, posterior increases exponentially.
