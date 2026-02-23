@@ -1,0 +1,16 @@
+In respect to the LLM, it performed fairly well. However, the first few versions
+had some limiting factors
+    - The initial code did not explicitly check for input shapes or enforce any corner case checks
+    - The LLM did not use Cholesky decomposition, which is the standard for computing Gaussian densities
+
+To verify correctness, I compared them with the scipy's implementation to check whether the results I would get were
+close to the numbers that SciPy would give me. What I found was that the difference in numbers was so small, 
+it was basically negligble amount.
+
+Numbers from testing results can be found in HW2 PDF.
+
+
+I used SciPy to test out three different parameterizations:
+    - Spherical covariance
+    - Diagonal covariance
+    - Full covariance
