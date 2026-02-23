@@ -29,13 +29,13 @@ def run_all_tests():
     D = 3
     mu = np.array([0.2, -0.1, 1.0])
     A = rng.normal(size=(D, D))
-    Sigma = A @ A.T + 0.2 * np.eye(D)  # positive definite
+    Sigma = A @ A.T + 0.2 * np.eye(D) 
     x = rng.normal(size=(5, D))
     tests.append(("full", x, mu, Sigma))
 
     for name, x_batch, mu, Sigma in tests:
         sp = multivariate_normal(mean=mu, cov=Sigma)
-        my = MultivariateNormal(mu, Sigma)  # if your constructor differs, adjust here
+        my = MultivariateNormal(mu, Sigma)  
 
         # ---------- PDF comparison (batch) ----------
         my_pdf = my.pdf(x_batch)
