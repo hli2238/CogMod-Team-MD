@@ -1,8 +1,13 @@
+# Problem 6: Estimating the Drift-Diffusion Model
+# Michael Lam and Dillon Li
+# March 2026
+# Usage: python3 problem6
+
+
 from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -75,6 +80,7 @@ def summarize_result(fit: Any, meta: dict[str, Any]) -> dict[str, Any]:
 
 
 def main() -> None:
+
     hw3_dir = Path(__file__).resolve().parent
     out_dir = hw3_dir / "problem6_outputs"
     out_dir.mkdir(parents=True, exist_ok=True)
