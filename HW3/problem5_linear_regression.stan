@@ -16,7 +16,7 @@ transformed parameters {
 }
 
 model {
-  // Priors from assignment
+  // Priors given from assignment
   sigma2 ~ inv_gamma(1, 1);
   alpha ~ normal(0, 10);
   beta ~ normal(0, 10);

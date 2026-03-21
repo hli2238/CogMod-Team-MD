@@ -1,3 +1,9 @@
+# Problem 5: Simple Bayesian Regression with Stan
+# Michael Lam and Dillon Li
+# March 2026
+# Usage: python3 problem5
+
+
 from __future__ import annotations
 
 import json
@@ -13,19 +19,45 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
+"""
+I set the parameters of the linear model to be:
+alpha = 10.0
+beta = 3.0
+sigma = 3.0
+"""
 SEED = 12345
-TRUE_ALPHA = 10.0
-TRUE_BETA = 3.0
-TRUE_SIGMA = 3.0
+TRUE_ALPHA = 10.0  
+TRUE_BETA = 3.0  
+TRUE_SIGMA = 3.0   
 
 
 def simulate_data(n: int, rng: np.random.Generator) -> Tuple[np.ndarray, np.ndarray]:
+    """Generate data to test our model from the linear model y = alpha + beta*x + eps.
+
+    Args:
+        n: Number of observations.
+        rng: NumPy random generator for reproducibility.
+
+    Returns:
+        Tuple of (x, y) arrays; x ~ N(0,1), y ~ N(alpha + beta*x, sigma^2).
+    """
     x = rng.normal(size=n)
     y = TRUE_ALPHA + TRUE_BETA * x + TRUE_SIGMA * rng.normal(size=n)
     return x, y
 
 
 def fit_model(model: CmdStanModel, x: np.ndarray, y: np.ndarray, seed: int):
+    """Run MCMC sampling for the Bayesian linear regression model.
+
+    Args:
+        model: Compiled CmdStanModel (problem5_linear_regression.stan).
+        x: Covariate values.
+        y: Outcome values.
+        seed: Random seed for reproducibility.
+
+    Returns:
+        CmdStanMCMC fit object with posterior draws.
+    """
     fit = model.sample(
         data={"N": len(x), "x": x.tolist(), "y": y.tolist()},
         seed=seed,
@@ -39,6 +71,15 @@ def fit_model(model: CmdStanModel, x: np.ndarray, y: np.ndarray, seed: int):
 
 
 def summarize_fit(fit, n: int) -> Dict[str, float]:
+    """Extract posterior summaries from the Stan fit.
+
+    Args:
+        fit: CmdStanMCMC fit object.
+        n: Sample size.
+
+    Returns:
+        Dict with posterior stats, diagnostics, and abs errors vs. TRUE_*.
+    """
     summary = fit.summary()
     posterior = fit.draws_pd(vars=["alpha", "beta", "sigma"])
 
@@ -112,6 +153,17 @@ def summarize_fit(fit, n: int) -> Dict[str, float]:
 
 
 def make_plots(fit, x: np.ndarray, y: np.ndarray, n: int, out_dir: Path) -> None:
+    """Organizes the data and plots the posterior marginals, regression fit, and trace plots. 
+
+    Also saves the plots to the output directory.
+
+    Args:
+        fit: CmdStanMCMC fit object.
+        x: Covariate values.
+        y: Outcome values.
+        n: Sample size.
+        out_dir: Directory to save figures.
+    """
     out_dir.mkdir(parents=True, exist_ok=True)
 
     posterior = fit.draws_pd(vars=["alpha", "beta", "sigma"])
@@ -156,6 +208,7 @@ def make_plots(fit, x: np.ndarray, y: np.ndarray, n: int, out_dir: Path) -> None
 
 
 def main() -> None:
+    """Orchestrate simulation, fitting, summarization, and saving for N=100 and N=1000."""
     hw3_dir = Path(__file__).resolve().parent
     stan_path = hw3_dir / "problem5_linear_regression.stan"
     out_dir = hw3_dir / "problem5_outputs"
